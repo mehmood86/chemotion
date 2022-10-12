@@ -8,3 +8,4 @@ chemotion.exe
 # don't include the private configuration file and instances folder
 chemotion-cli.yml
 instances/
+chemotion-test/
