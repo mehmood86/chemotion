@@ -58,20 +58,19 @@ func handleSetupCypress() {
 		repo.Fetch(&git.FetchOptions{
 			RemoteName: "origin",
 		})
+		app := "npm"
+		cmd := exec.Command(app, "install", "cypress", "--save-dev")
+		cmd.Dir = "./chemotion-test"
+		cmd.Stdout = os.Stdin
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		log.Printf("path: %s", cmd)
+		cmd_err := cmd.Run()
+		if cmd_err != nil {
+			log.Fatalf("failed to call cmd.Run(): %v", cmd_err)
+		}
 	} else {
 		fmt.Println("The repo already exists!.")
-	}
-
-	app := "npm"
-	cmd := exec.Command(app, "install", "cypress", "--save-dev")
-	cmd.Dir = "./chemotion-test"
-	cmd.Stdout = os.Stdin
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	log.Printf("path: %s", cmd)
-	err := cmd.Run()
-	if err != nil {
-		log.Fatalf("failed to call cmd.Run(): %v", err)
 	}
 }
 
